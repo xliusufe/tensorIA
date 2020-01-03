@@ -9,7 +9,7 @@ EstInteg <- function(Y, Z, S, A, B, C, mu, optsList) {
     .Call(`_tensorIA_EstInteg`, Y, Z, S, A, B, C, mu, optsList)
 }
 
-EstFR <- function(Y, X) {
-    .Call(`_tensorIA_EstFR`, Y, X)
+EstFR <- function(Y, Z) {
+    .Call(`_tensorIA_EstFR`, Y, Z)
 }
 

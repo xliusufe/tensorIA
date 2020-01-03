@@ -23,12 +23,22 @@
 	p <- 5
 	q <- 5
 	g <- 5
-	D3 <- matrix(runif(p*q*g, 0.7, 1), q, p*g) # tensor with size 5*5*5
+	r10 <- 2
+	r20 <- 2
+	r30 <- 2
+	S3 <- matrix(runif(r10*r20*r30,3,7),nrow = r30)
+	T1 <- matrix(rnorm(p*r10),nrow = p)
+	U1 <- qr.Q(qr(T1))
+	T1 <- matrix(rnorm(g*r20),nrow = g)
+	U2 <- qr.Q(qr(T1))  
+	T1 <- matrix(rnorm(q*r30),nrow = q)
+	U3 <- qr.Q(qr(T1))
+	D3 <- U3%*%S3%*%t(kronecker(U2,U1))
 	X <- matrix(runif(n*p*g), nrow = n)
 	eps <- matrix(rnorm(n*q),n,q)
 	Y <- X%*%t(D3)  + eps
   
-    fit <- integ_dr(mydata$Y, mydata$X)
+    fit <- integ_dr(Y, X, g)
 	D3hat <- fit$Dnew
 	D2hat <- TransferModalUnfoldings(D3hat,3,2,p,g,q)
 	opt <- fit$rk_opt	

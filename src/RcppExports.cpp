@@ -42,14 +42,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // EstFR
-List EstFR(MatrixXd Y, MatrixXd X);
-RcppExport SEXP _tensorIA_EstFR(SEXP YSEXP, SEXP XSEXP) {
+List EstFR(MatrixXd Y, MatrixXd Z);
+RcppExport SEXP _tensorIA_EstFR(SEXP YSEXP, SEXP ZSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< MatrixXd >::type Y(YSEXP);
-    Rcpp::traits::input_parameter< MatrixXd >::type X(XSEXP);
-    rcpp_result_gen = Rcpp::wrap(EstFR(Y, X));
+    Rcpp::traits::input_parameter< MatrixXd >::type Z(ZSEXP);
+    rcpp_result_gen = Rcpp::wrap(EstFR(Y, Z));
     return rcpp_result_gen;
 END_RCPP
 }
