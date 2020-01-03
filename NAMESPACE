@@ -1,0 +1,5 @@
+importFrom("stats", "quantile", "rnorm", "runif")
+useDynLib(tensorIA, .registration=TRUE)
+exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)
+export(integ,integ_dr,TransferModalUnfoldings)
