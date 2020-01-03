@@ -24,7 +24,7 @@ integ <- function(Y,X,g=1,r1=NULL,r2=NULL,r3=NULL,SABC=NULL,intercept=TRUE,mu=NU
     S = SABC$S
   }
   if(!intercept | is.null(mu)) mu = rep(0,q)
-  opts = list(eps=eps,eps1=eps,max_step=max_step,max_step1=max_step,n=n,r1=r1,r2=r2,r3=r3,p=p,q=q,g=g)
+  opts = list(eps=eps,eps1=eps,max_step=max_step,max_step1=max_step,n=n,r1=2,r2=2,r3=2,p=p,q=q,g=g,intercept=intercept)
   fit = EstInteg(Y,X,S,A,B,C,mu,opts)
   return(list(Dnew=fit$Dnew, 
               rss=fit$likhd,

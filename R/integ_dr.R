@@ -28,7 +28,7 @@ integ_dr <- function(Y,X,g=1,method="BIC",ncv=10,r1_index=NULL,r2_index=NULL,r3_
     S = SABC$S
   }
   if(!intercept | is.null(mu)) mu = rep(0,q)
-  opts = list(eps=eps,eps1=eps,max_step=max_step,max_step1=max_step,n=n,r1=r1,r2=r2,r3=r3,p=p,q=q,g=g)
+  opts = list(eps=eps,eps1=eps,max_step=max_step,max_step1=max_step,n=n,r1=2,r2=2,r3=2,p=p,q=q,g=g,intercept=intercept)
   
   if((max(r1_index)>dim(A)[2])|(max(r2_index)>dim(B)[2])|(max(r3_index)>dim(C)[2]))
     stop("maximum number of index sequence of r1, r2, and r3 must not be larger than A, B, and C, respectively !")
