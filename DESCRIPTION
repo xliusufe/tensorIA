@@ -11,7 +11,7 @@ Author: Xu Liu [aut,cre],
 		Yiming Liu [aut],
         Mengyun Wu [aut].        
 Maintainer: Xu Liu <liu.xu@sufe.edu.cn>
-Description: For a multivariates grouped gression model, with or without aparsity assumptions, treating the coefficients as a third-order tensor and borrowing Tucker decomposition to reduce the number of parameters. 
+Description: For a grouped multivariates gression model, with or without aparsity assumptions, treating the coefficients as a third-order tensor and borrowing Tucker decomposition to reduce the number of parameters. 
 License: GPL (>= 2)
 Imports: Rcpp (>= 0.11.15), RcppEigen (>= 0.3.2.3.0)
 LinkingTo: Rcpp, RcppEigen

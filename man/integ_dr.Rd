@@ -6,7 +6,7 @@
   Integrative analysis for GWAS data without sparsity assumption, and with ranks selected by \code{BIC}, \code{AIC}, \code{EBIC}, \code{CV}, or \code{GCV}.
 }
 \description{
-  Fit a multivariates grouped gression model by treating coefficients as a order 3 tensor, without aparsity assumptions, and with ranks \eqn{r_1, r_2, r_3} selected by \code{BIC}, \code{AIC}, \code{EBIC}, \code{CV}, or \code{GCV}.
+  Fit a grouped multivariates gression model by treating coefficients as a order 3 tensor, without aparsity assumptions, and with ranks \eqn{r_1, r_2, r_3} selected by \code{BIC}, \code{AIC}, \code{EBIC}, \code{CV}, or \code{GCV}.
 } 
 
 \usage{integ_dr(Y, X, g = 1, method = "BIC", ncv = 10, r1_index = NULL,

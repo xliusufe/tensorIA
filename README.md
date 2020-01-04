@@ -1,7 +1,7 @@
 # tensorIA
  Integrative analysis based on tensor modelling.
  
-  For a multivariates grouped gression model, with or without aparsity assumptions, 
+  For a grouped multivariates gression model, with or without aparsity assumptions, 
   treating the coefficients as a third-order tensor and borrowing Tucker decomposition to reduce the number of parameters.
   
 # Installation

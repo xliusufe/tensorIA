@@ -6,7 +6,7 @@
   Integrative analysis for GWAS data.
 }
 \description{
-  Fit a multivariates grouped gression model by treating coefficients as a order 3 tensor, without aparsity assumptions, and given ranks  \eqn{r_1, r_2, r_3}.
+  Fit a grouped multivariates gression model by treating coefficients as a order 3 tensor, without aparsity assumptions, and given ranks  \eqn{r_1, r_2, r_3}.
 }
 
 \usage{integ(Y, X, g = 1, r1 = NULL, r2 = NULL, r3 = NULL, SABC = NULL, 
