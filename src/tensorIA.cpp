@@ -24,6 +24,7 @@ List EstInteg(MatrixXd Y, MatrixXd Z, MatrixXd S, MatrixXd A, MatrixXd B, Matrix
 	VectorXi convergence1;
 	VectorXd Ones;
 	Ones.setOnes(n);
+	List fit;
 	int step = 0;
 	while (step<opts.max_step) {
 		convergence1 = VectorXi::Constant(4, 1);
@@ -36,27 +37,36 @@ List EstInteg(MatrixXd Y, MatrixXd Z, MatrixXd S, MatrixXd A, MatrixXd B, Matrix
 			likhd0 = likhd1;
 		}
 		else convergence1[0]=0;
-		Cnew = updateC(Y1, Z, A, B, C, S);
-		Dnew = Cnew * S *kroneckerProduct(B.transpose(), A.transpose());
+		fit = updateC(Y1, Z, A, B, C, S);
+		Cnew = fit[0];
+		Snew = fit[1];
+		Dnew = Cnew * Snew *kroneckerProduct(B.transpose(), A.transpose());
 		likhd1 = (Y1 - Z * Dnew.transpose()).squaredNorm();
 		if (likhd1<likhd0) {
 			C = Cnew;
+			S = Snew;
 			likhd0 = likhd1;
 		}
 		else convergence1[1]=0;
-		Anew = updateA(Y1, Z, A, B, C, S);
-		Dnew = C * S *kroneckerProduct(B.transpose(), Anew.transpose());
+		fit = updateA(Y1, Z, A, B, C, S);
+		Anew = fit[0];
+		Snew = fit[1];
+		Dnew = C * Snew *kroneckerProduct(B.transpose(), Anew.transpose());
 		likhd1 = (Y1 - Z * Dnew.transpose()).squaredNorm();
 		if (likhd1<likhd0) {
 			A = Anew;
+			S = Snew;
 			likhd0 = likhd1;
 		}
 		else convergence1[2]=0;
-		Bnew = updateB(Y1, Z, A, B, C, S);	
-		Dnew = C * S *kroneckerProduct(Bnew.transpose(), A.transpose());
+		fit = updateB(Y1, Z, A, B, C, S);
+		Bnew = fit[0];
+		Snew = fit[1];		
+		Dnew = C * Snew *kroneckerProduct(Bnew.transpose(), A.transpose());
 		likhd1 = (Y1  - Z * Dnew.transpose()).squaredNorm();
 		if (likhd1<likhd0) {
 			B = Bnew;
+			S = Snew;
 			if(opts.intercept){
 				mu = (Y - Z * Dnew.transpose()).colwise().sum()/n;
 				Y1 = Y - kroneckerProduct(Ones,mu);

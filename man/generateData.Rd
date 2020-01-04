@@ -72,7 +72,9 @@ generateData(n, q, p, g, D3, SigmaX=NULL, SigmaE=NULL,
   p <- 10
   q <- 10
   g <- 10
-  r10=r20=r30=2
+  r10 <- 2
+  r20 <- 2
+  r30 <- 2
   S3 <- matrix(runif(r10*r20*r30,3,7),nrow = r30)
   T1 <- matrix(rnorm(s0*r10),nrow = s0)
   U1 <- qr.Q(qr(T1))
