@@ -15,15 +15,12 @@ integ_bic <- function(Y,X,method,r1_index,r2_index,r3_index,S,A,B,C,mu,opts){
         fit = EstInteg(Y,X,as.matrix(S[1:r3,1:(r1*r2)]),as.matrix(A[,1:r1]),as.matrix(B[,1:r2]),as.matrix(C[,1:r3]),mu,opts)
         df = r1*r2*r3+p*r1+g*r2+q*r3-r1^2-r2^2-r3^2
         loglikelih =  -n*q * (log(2*pi) + log(fit$likhd))
-        if(method=="BIC"){
-          bic = loglikelih + log(n*q)*df
-        }
-        if(method=="AIC") bic = loglikelih + 2*df
-        if(method=="EBIC"){
-          bic = loglikelih + log(n*q)*df
-          bic = bic + 2*(lgamma(p+1) - lgamma(df+1) - lgamma(p-df+1))
-        }
-        if(method=="GCV") bic = loglikelih/(1-df/n)^2
+        bic <- switch (method,
+                       BIC = loglikelih + log(n*q)*df,
+                       AIC = loglikelih + 2*df,
+                       EBIC = loglikelih + log(n*q)*df + 2*(lgamma(p*g+1) 
+                                         - lgamma(df+1) - lgamma(p*g-df+1)),
+                       GCV = loglikelih/(1-df/n)^2)        
         RSS = c(RSS,bic)
       }
     }
