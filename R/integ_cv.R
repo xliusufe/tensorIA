@@ -22,11 +22,8 @@ integ_cv <- function(Y,X,ncv,r1_index,r2_index,r3_index,S,A,B,C,mu,opts){
         for(r1 in r1_index){
           opts$r1=r1
           fit = EstInteg(Ytrain,Xtrain,as.matrix(S[1:r3,1:(r1*r2)]),as.matrix(A[,1:r1]),as.matrix(B[,1:r2]),as.matrix(C[,1:r3]),mu,opts)
-          Dnew  = fit$Dnew
-          if(opts$intercept)
-            RSS0 = c(RSS0,sum((Ytest - matrix(rep(fit$mu,each=nt),nt) - Xtest%*%t(Dnew))^2))
-          else
-            RSS0 = c(RSS0,sum((Ytest - Xtest%*%t(Dnew))^2))
+          if(opts$intercept)  RSS0 = c(RSS0,sum((Ytest - matrix(rep(fit$mu,each=nt),nt) - Xtest%*%t(fit$Dnew))^2))
+          else  RSS0 = c(RSS0,sum((Ytest - Xtest%*%t(fit$Dnew))^2))
         }
       }
     }

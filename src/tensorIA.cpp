@@ -19,7 +19,8 @@ List EstInteg(MatrixXd Y, MatrixXd Z, MatrixXd S, MatrixXd A, MatrixXd B, Matrix
 	opts.intercept = as<int>(optsList["intercept"]);
 	
 	double  likhd0 = pow(10, 6), likhd1 = 0;
-	int n = opts.n,q = opts.q;
+	int n = Y.rows(),q = opts.q;
+	opts.n = n;
 	MatrixXd Dnew,Cnew,Anew,Bnew,Snew, Y1=Y;
 	VectorXi convergence1;
 	VectorXd Ones;
