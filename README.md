@@ -38,7 +38,7 @@
 	eps <- matrix(rnorm(n*q),n,q)
 	Y <- X%*%t(D3)  + eps
   
-    fit <- integ_dr(Y, X, g)
+    fit <- integ_dr(Y, X, g, intercept=FALSE)
 	D3hat <- fit$Dnew
 	D2hat <- TransferModalUnfoldings(D3hat,3,2,p,g,q)
 	opt <- fit$rk_opt	
