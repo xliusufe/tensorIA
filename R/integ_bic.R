@@ -18,8 +18,8 @@ integ_bic <- function(Y,X,method,r1_index,r2_index,r3_index,S,A,B,C,mu,opts){
         bic <- switch (method,
                        BIC = loglikelih + log(n*q)*df,
                        AIC = loglikelih + 2*df,
-                       EBIC = loglikelih + log(n*q)*df + 2*(lgamma(p*g+1) 
-                                         - lgamma(df+1) - lgamma(p*g-df+1)),
+                       EBIC = loglikelih + log(n*q)*df + 2*(lgamma(p*g*q+1) 
+                                         - lgamma(df+1) - lgamma(p*g*q-df+1)),
                        GCV = loglikelih/(1-df/n)^2)        
         RSS = c(RSS,bic)
       }
