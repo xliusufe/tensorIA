@@ -10,7 +10,7 @@
 }
 
 \usage{integ(Y, X, g = 1, r1 = NULL, r2 = NULL, r3 = NULL, SABC = NULL, 
-           intercept = TRUE, mu = NULL, eps = 1e-4, max_step = 20)
+           intercept = FALSE, mu = NULL, eps = 1e-4, max_step = 20)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -30,7 +30,7 @@
               \eqn{A}, \eqn{B}, \eqn{C}. By default,
               initial matrices are provided by random.}
 
-  \item{intercept}{Should intercept(s) be fitted (default=\code{TRUE}) or set to zero (\code{FALSE})?}
+  \item{intercept}{Should intercept(s) be fitted (\code{TRUE}) or set to zero (default=\code{FALSE})?}
   
   \item{mu}{A user-specified initial of intercept(s), a \eqn{q}-vector. Default is \code{0}.}
     
@@ -88,7 +88,7 @@ Integrative analysis based on tensor modelling.
   T1 <- matrix(rnorm(q*r30),nrow = q)
   U3 <- qr.Q(qr(T1))
   D3 <- U3\%*\%S3\%*\%t(kronecker(U2,U1))
-  X <- matrix(runif(n*p*g), nrow = n)
+  X <- matrix(rnorm(n*p*g), nrow = n)
   eps <- matrix(rnorm(n*q),n,q)
   Y <- X\%*\%t(D3)  + eps
   

@@ -451,7 +451,7 @@ MatrixXd updateS(MatrixXd Y, MatrixXd Z, MatrixXd A, MatrixXd B, MatrixXd C)
 }
 //----------------------------------------------------------------**
 //***--------------------updateC----------------------------------**
-MatrixXd updateC(MatrixXd Y, MatrixXd Z, MatrixXd A, MatrixXd B, MatrixXd C, MatrixXd S)
+List updateC(MatrixXd Y, MatrixXd Z, MatrixXd A, MatrixXd B, MatrixXd C, MatrixXd S)
 {
 	int r3 = C.cols(),q = C.rows(), j,kp;
 	MatrixXd ztilde = Z * kroneckerProduct(B, A);
@@ -470,13 +470,16 @@ MatrixXd updateC(MatrixXd Y, MatrixXd Z, MatrixXd A, MatrixXd B, MatrixXd C, Mat
 	else
 	  for (j = 0; j < q; j++) Cnew.row(j) = (QbyR(Q.transpose(), UpTriangularInv(R), 0)*Y.col(j)).transpose();
 	
-	return Cnew;
+	qr.compute(Cnew);
+	MatrixXd VR = qr.matrixQR().triangularView<Upper>();
+	MatrixXd VQ = qr.householderQ();
+	return List::create(Named("Cnew") = VQ.block(0, 0, q, r3), Named("Snew") = QbyR(S, VR.block(0, 0, r3, r3), 0));
 }
 //----------------------------------------------------------------**
 //***--------------------updateA----------------------------------**
-MatrixXd updateA(MatrixXd Y, MatrixXd Z, MatrixXd A, MatrixXd B, MatrixXd C, MatrixXd S)
+List updateA(MatrixXd Y, MatrixXd Z, MatrixXd A, MatrixXd B, MatrixXd C, MatrixXd S)
 {
-	int r1 = A.cols(), r2 = B.cols(), p = A.rows(), K = B.rows();
+	int r1 = A.cols(), r2 = B.cols(), r3 = C.cols(), p = A.rows(), K = B.rows();
 	int d = r1 * p, t1,t2,t3,t4,j;
 	MatrixXd W = C * S, Wt1, Zt2, Wt3, Zt4, zbw1, zbw2, vectorA;
 	VectorXd tU;
@@ -505,13 +508,19 @@ MatrixXd updateA(MatrixXd Y, MatrixXd Z, MatrixXd A, MatrixXd B, MatrixXd C, Mat
 	}
 	vectorA = solveEquationQR(tV,tU);
 	vectorA.resize(r1, p);
-	return vectorA.transpose();
+	HouseholderQR<MatrixXd> qr;
+	qr.compute(vectorA.transpose());
+	MatrixXd VR = qr.matrixQR().triangularView<Upper>();
+	MatrixXd VQ = qr.householderQ();
+	MatrixXd S1new, S1 = TransferModalUnfoldings(S,3,1,r1,r2,r3);
+	S1new = QbyR(S1, VR.block(0, 0, r1, r1), 0);
+	return List::create(Named("Anew") = VQ.block(0, 0, p, r1), Named("Snew") = TransferModalUnfoldings(S1new,1,3,r1,r2,r3));
 }
 //----------------------------------------------------------------**
 //***--------------------updateB----------------------------------**
-MatrixXd updateB(MatrixXd Y, MatrixXd Z, MatrixXd A, MatrixXd B, MatrixXd C, MatrixXd S)
+List updateB(MatrixXd Y, MatrixXd Z, MatrixXd A, MatrixXd B, MatrixXd C, MatrixXd S)
 {
-	int r1 = A.cols(), r2 = B.cols(), p = A.rows(), K = B.rows(), q = C.rows(), n = Z.rows();	
+	int r1 = A.cols(), r2 = B.cols(), r3 = C.cols(), p = A.rows(), K = B.rows(), q = C.rows(), n = Z.rows();	
 	int d = r2*K, t1,t2,t3,t4;
 	MatrixXd W = C * S, Wt1, Zt2, Wt3, Zt4, zaw1, zaw2, vectorB;
 	VectorXd tU;
@@ -535,6 +544,12 @@ MatrixXd updateB(MatrixXd Y, MatrixXd Z, MatrixXd A, MatrixXd B, MatrixXd C, Mat
 	}
 	vectorB = solveEquationQR(tV, tU);
 	vectorB.resize(r2, K);	
-	return vectorB.transpose();
+	HouseholderQR<MatrixXd> qr;
+	qr.compute(vectorB.transpose());
+	MatrixXd VR = qr.matrixQR().triangularView<Upper>();
+	MatrixXd VQ = qr.householderQ();
+	MatrixXd S2new, S2 = TransferModalUnfoldings(S,3,2,r1,r2,r3);
+	S2new = QbyR(S2, VR.block(0, 0, r2, r2), 0);
+	return List::create(Named("Bnew") = VQ.block(0, 0, K, r2), Named("Snew") = TransferModalUnfoldings(S2new,2,3,r1,r2,r3));
 }
 	

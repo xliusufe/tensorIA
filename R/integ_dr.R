@@ -1,7 +1,7 @@
 
 ##--------------main by BIC without sparsity----------------------##
 integ_dr <- function(Y,X,g=1,method="BIC",ncv=10,r1_index=NULL,r2_index=NULL,r3_index=NULL,SABC=NULL,
-                   intercept=TRUE,mu=NULL,eps=1e-4,max_step=20){
+                   intercept=FALSE,mu=NULL,eps=1e-4,max_step=20){
 
   n <- dim(Y)[1]
   q <- dim(Y)[2]

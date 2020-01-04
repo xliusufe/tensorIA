@@ -1,6 +1,6 @@
 
 ##--------------without sparsity----------------------##
-integ <- function(Y,X,g=1,r1=NULL,r2=NULL,r3=NULL,SABC=NULL,intercept=TRUE,mu=NULL,eps=1e-4,max_step=20){
+integ <- function(Y,X,g=1,r1=NULL,r2=NULL,r3=NULL,SABC=NULL,intercept=FALSE,mu=NULL,eps=1e-4,max_step=20){
   n <- dim(Y)[1]
   q <- dim(Y)[2]
   nx <- dim(X)[2]

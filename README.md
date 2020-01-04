@@ -34,7 +34,7 @@
 	T1 <- matrix(rnorm(q*r30),nrow = q)
 	U3 <- qr.Q(qr(T1))
 	D3 <- U3%*%S3%*%t(kronecker(U2,U1))
-	X <- matrix(runif(n*p*g), nrow = n)
+	X <- matrix(rnorm(n*p*g), nrow = n)
 	eps <- matrix(rnorm(n*q),n,q)
 	Y <- X%*%t(D3)  + eps
   

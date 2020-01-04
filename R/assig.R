@@ -21,7 +21,7 @@ generateData <- function(n,q,p,g,D3,SigmaX=NULL,SigmaE=NULL,mu=NULL,sigma2=NULL,
   }
   if(is.null(seed_id)) seed_id=1000
   set.seed(seed_id)
-  X <- matrix(runif(n*p*g), nrow = n)%*%chol(SigmaX)
+  X <- matrix(rnorm(n*p*g), nrow = n)%*%chol(SigmaX)
   eps <- matrix(rnorm(n*q),n,q)
   Y <- matrix(rep(mu,each=n),n) +  X%*%t(D3) + sigma2*eps%*%chol(SigmaE)
   return(list(Y=Y,X=X))
