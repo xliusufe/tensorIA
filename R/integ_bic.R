@@ -14,7 +14,7 @@ integ_bic <- function(Y,X,method,r1_index,r2_index,r3_index,S,A,B,C,mu,opts){
         opts$r1=r1
         fit = EstInteg(Y,X,as.matrix(S[1:r3,1:(r1*r2)]),as.matrix(A[,1:r1]),as.matrix(B[,1:r2]),as.matrix(C[,1:r3]),mu,opts)
         df = r1*r2*r3+p*r1+g*r2+q*r3-r1^2-r2^2-r3^2
-        loglikelih =  n*q * log(fit$likhd)/(n*q))
+        loglikelih =  n*q * log(fit$likhd/(n*q))
         bic <- switch (method,
                        BIC = loglikelih + log(n*q)*df,
                        AIC = loglikelih + 2*df,
