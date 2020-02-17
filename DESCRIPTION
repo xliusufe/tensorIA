@@ -4,12 +4,10 @@ Title: tensorIA
 Version: 0.1.0
 Authors@R: c(person(given = "Xu", family = "Liu", role = c("aut","cre"), email = "liu.xu@sufe.edu.cn"),
              person(given = "Wei", family = "Zou", role = "aut"),
-			 person(given = "Yiming", family = "Liu", role = "aut"),
-             person(given = "Mengyun", family = "Wu", role = "aut"))
+			 person(given = "Yiming", family = "Liu", role = "aut"))
 Author: Xu Liu [aut,cre], 
         Wei Zou [aut],
-		Yiming Liu [aut],
-        Mengyun Wu [aut].        
+		Yiming Liu [aut].        
 Maintainer: Xu Liu <liu.xu@sufe.edu.cn>
 Description: For a grouped multivariates gression model, with or without aparsity assumptions, treating the coefficients as a third-order tensor and borrowing Tucker decomposition to reduce the number of parameters. 
 License: GPL (>= 2)
