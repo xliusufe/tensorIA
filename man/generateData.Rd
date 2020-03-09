@@ -24,11 +24,11 @@ generateData(n, q, p, g, D3, SigmaX=NULL, SigmaE=NULL,
   
   \item{D3}{The mode of unfolding \eqn{D_{(3)}}.}
   
-  \item{sigma2}{err variance. Default is 0.2.}
-  
   \item{SigmaX}{A \eqn{pg\times pg} positive-definition matrix, which is the covariance matrix of covariates \eqn{X}.}
   
-  \item{SigmaX}{A \eqn{q\times q} positive-definition matrix, which is the covariance matrix of error \eqn{E}.}
+  \item{SigmaE}{A \eqn{q\times q} positive-definition matrix, which is the covariance matrix of error \eqn{E}. Default is \eqn{diag(q)}.}
+  
+  \item{sigma2}{The multiplier of err covariance. Thus, the covariance of err is \code{sigma2*SigmaE}. Default is 0.2. }
   
   \item{seed_id}{A positive integer, the seed for generating the random numbers.}
 }

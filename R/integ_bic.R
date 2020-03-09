@@ -40,7 +40,6 @@ integ_bic <- function(Y,X,method,r1_index,r2_index,r3_index,S,A,B,C,mu,opts){
               rss=fit$likhd,
               mu = fit$mu,
               rk_opt=c(r1_opt,r2_opt,r3_opt),
-              selected=selected,
               Y = Y,
               X = X
               )

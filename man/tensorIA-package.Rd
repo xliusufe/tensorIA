@@ -6,7 +6,7 @@
   Integrative analysis based on tensor modelling
 }
 \description{
-  For a grouped multivariates gression model, with or without sparsity assumptions, 
+  For a grouped multivariate regression model, with or without sparsity assumptions, 
   treating the coefficients as a third-order tensor and borrowing Tucker decomposition to reduce the number of parameters.  
 }
 \details{

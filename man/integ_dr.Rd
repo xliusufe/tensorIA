@@ -6,7 +6,7 @@
   Integrative analysis for GWAS data without sparsity assumption, and with ranks selected by \code{BIC}, \code{AIC}, \code{EBIC}, \code{CV}, or \code{GCV}.
 }
 \description{
-  Fit a grouped multivariates gression model by treating coefficients as a order 3 tensor, without aparsity assumptions, and with ranks \eqn{r_1, r_2, r_3} selected by \code{BIC}, \code{AIC}, \code{EBIC}, \code{CV}, or \code{GCV}.
+  Fit a grouped multivariate regression model by treating coefficients as an order-3 tensor, without sparsity assumptions, and with ranks \eqn{r_1, r_2, r_3} selected by \code{BIC}, \code{AIC}, \code{EBIC}, \code{CV}, or \code{GCV}.
 } 
 
 \usage{integ_dr(Y, X, g = 1, method = "BIC", ncv = 10, r1_index = NULL,
@@ -24,24 +24,24 @@
   \item{method}{The method to be applied to select parameters.  Either \code{BIC} (the default), \code{AIC}, \code{EBIC}, \code{CV}, 
                 or \code{GCV}.}
     
-  \item{ncv}{The number of cross-validation folds.  Default is 10. If \code{method} is  
-             \code{"BIC"}, \code{ncv} is useless.}
+  \item{ncv}{The number of cross-validation folds.  Default is 10. \code{ncv} is useless, if \code{method} is not   
+             \code{"CV"}.}
     
   \item{r1_index}{A user-specified sequence of \eqn{r_1} values, where 
                    \eqn{r_1} is the first dimension of single value matrix of the 
                    tensor. Default is 
-                   \code{r1_index}\eqn{=1,\cdots,\min(\log(n)\rceil,p)}.
+                   \code{r1_index}\eqn{=1,\cdots,\min(\lceil\log(n)\rceil,p)}.
                    }
    
   \item{r2_index}{A user-specified sequence of \eqn{r_2} values, where 
                   \eqn{r_2} is the second dimension of single value matrix of the 
-                  tensor. Default is \code{r2_index}\eqn{=1,\cdots,\min(\log(n)\rceil,g)}.
+                  tensor. Default is \code{r2_index}\eqn{=1,\cdots,\min(\lceil\log(n)\rceil,g)}.
                   }
    
   \item{r3_index}{A user-specified sequence of \eqn{r_3} values, where 
                   \eqn{r_3} is the third dimension of single value matrix of the  
                   tensor. Default is 
-                  \code{r3_index}\eqn{=1,\cdots,\min(\log(n)\rceil,q)}.
+                  \code{r3_index}\eqn{=1,\cdots,\min(\lceil\log(n)\rceil,q)}.
                   }
                    
   \item{SABC}{A user-specified list of initial coefficient matrix of \eqn{S},
@@ -62,7 +62,7 @@
 
 \details{This function gives \code{pq} functional coefficients' estimators of MAM. The singular value matrix of 
   tensor is a \eqn{r_1\times r_2\times r_3}-tensor. We choose \eqn{r_1}, \eqn{r_2} 
-  and \eqn{r_3}  by \code{BIC} or \code{CV}.
+  and \eqn{r_3}  by \code{BIC}, \code{AIC}, \code{EBIC}, \code{CV}, or \code{GCV}.
 }
 
 \value{
@@ -75,9 +75,7 @@
   \item{rss}{Residual sum of squares (RSS).}
   
   \item{rk_opt}{The optimal parametres that slected by \code{BIC} (the default), \code{AIC}, \code{EBIC}, \code{CV}, 
-                or \code{GCV}. It is a vector with length 4, which are selected \eqn{r_1},  \eqn{r_2}, \eqn{r_3}, and \eqn{K}.}
-  
-  \item{selected}{Which \eqn{\lambda} is selection.}
+                or \code{GCV}. It is a vector with length 4, which are selected \eqn{r_1},  \eqn{r_2}, and \eqn{r_3}.}
   
   \item{Y}{Response \eqn{Y}.}
   
